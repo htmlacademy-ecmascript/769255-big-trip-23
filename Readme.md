@@ -1,7 +1,7 @@
 # Проект «Большое путешествие»
 
-* Студент: [Инна Хаглеева](https://up.htmlacademy.ru/ecmascript/23/user/769255).
-* Наставник: `Неизвестно`.
+- Студент: [Инна Хаглеева](https://up.htmlacademy.ru/ecmascript/23/user/769255).
+- Наставник: [Артем Именин](https://github.com/aimenin).
 
 ---
 
