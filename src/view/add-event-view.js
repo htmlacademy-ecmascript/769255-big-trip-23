@@ -162,7 +162,7 @@ function createAddEventPointTemplate() {
       </section>
     </section>
   </form>
-</li>`
+</li>`;
 }
 
 export default class AddEventView {

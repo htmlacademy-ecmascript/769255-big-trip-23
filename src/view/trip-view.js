@@ -1,7 +1,7 @@
 ﻿import {createElement} from '../render';
 
 function createTripTemplate() {
-  return `<ul class="trip-events__list"></ul>`
+  return '<ul class="trip-events__list"></ul>';
 }
 
 export default class TripView {

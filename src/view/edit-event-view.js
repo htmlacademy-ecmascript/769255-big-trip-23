@@ -155,7 +155,7 @@ function createEditEventTemplate() {
       </section>
     </section>
   </form>
-</li>`
+</li>`;
 }
 
 export default class EditEventView {
