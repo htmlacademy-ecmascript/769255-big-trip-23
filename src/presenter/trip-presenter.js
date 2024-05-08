@@ -8,8 +8,9 @@ import EventView from '../view/event-view';
 export default class TripPresenter {
   tripView = new TripView();
 
-  constructor({tripContainer}) {
+  constructor({tripContainer, eventsModel}) {
     this.tripContainer = tripContainer;
+    this.eventsModel = eventsModel;
   }
 
   init() {
@@ -18,8 +19,8 @@ export default class TripPresenter {
     render(new EditEventView(), this.tripView.getElement());
     render(new AddEventView(), this.tripView.getElement());
 
-    for(let i = 0; i < 3; i++) {
-      render(new EventView(), this.tripView.getElement());
+    for(let i = 0; i < this.eventsModel.length; i++) {
+      render(new EventView({event: this.eventsModel[i]}), this.tripView.getElement());
     }
   }
 }
