@@ -1,24 +1,19 @@
-﻿import { EVENT_TYPES } from "../const";
+﻿import { EVENT_TYPES } from '../const';
 
-const mockOffers = [{
-  type: EVENT_TYPES.TAXI,
-  offers: [{
-  id: '1',
-  title: 'Upgrade to a business class',
-  price: 120
-  }]},
+export const mockOffers = [
   {
-    type: EVENT_TYPES.BUS,
-    offers: [{
-    id: '2',
-    title: 'Upgrade',
-    price: 20
-    }]},
-    {
-      type: EVENT_TYPES.FLIGHT,
-      offers: [{
-      id: '3',
-      title: 'Upgrade to a business class',
-      price: 405
-      }]}
-    ]
+    type: EVENT_TYPES.FLIGHT,
+    offers: [
+      {
+        id: '3',
+        title: 'Upgrade to a business class',
+        price: 405,
+      },
+      {
+        id: '4',
+        title: 'Add meal',
+        price: 17,
+      },
+    ],
+  },
+];
