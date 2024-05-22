@@ -1,4 +1,4 @@
-﻿import { createElement } from '../render';
+﻿import AbstractView from '../framework/view/abstract-view';
 import { humanizeEventDate } from '../utils';
 
 function createEventTemplate(event) {
@@ -46,23 +46,23 @@ function createEventTemplate(event) {
 </li>`;
 }
 
-export default class EventView {
-  constructor({ event }) {
-    this.event = event;
+export default class EventView extends AbstractView {
+  #event = null;
+  #handleClick = null;
+
+  constructor({ event, onClick }) {
+    super();
+    this.#event = event;
+    this.#handleClick = onClick;
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#clickHandler);
   }
 
-  getTemplate() {
-    return createEventTemplate(this.event);
+  get template() {
+    return createEventTemplate(this.#event);
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-      return this.element;
-    }
-  }
-
-  removeElement() {
-    this.element = null;
-  }
+  #clickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleClick();
+  };
 }

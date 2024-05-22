@@ -2,10 +2,10 @@
 import { mockOffers } from '../mock/offers';
 
 export default class EditEventModel {
-  offers = mockOffers[0].offers;
-  destination = mockDestinations[0];
+  #offers = mockOffers[0].offers;
+  #destination = mockDestinations[0];
 
-  getEditEvent() {
-    return { offers: this.offers, destination: this.destination };
+  get editEvent() {
+    return { offers: this.#offers, destination: this.#destination };
   }
 }

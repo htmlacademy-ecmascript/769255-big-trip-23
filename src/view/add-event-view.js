@@ -1,4 +1,4 @@
-﻿import { createElement } from '../render';
+﻿import AbstractView from '../framework/view/abstract-view';
 
 function createAddEventTemplate({ offers, destination }) {
   const offersTemplate = offers.map(
@@ -130,23 +130,15 @@ function createAddEventTemplate({ offers, destination }) {
 </li>`;
 }
 
-export default class AddEventView {
+export default class AddEventView extends AbstractView {
+  #event = null;
+
   constructor({ event }) {
-    this.event = event;
+    super();
+    this.#event = event;
   }
 
-  getTemplate() {
-    return createAddEventTemplate(this.event);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-      return this.element;
-    }
-  }
-
-  removeElement() {
-    this.element = null;
+  get template() {
+    return createAddEventTemplate(this.#event);
   }
 }

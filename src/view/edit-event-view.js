@@ -1,4 +1,4 @@
-﻿import { createElement } from '../render';
+﻿import AbstractView from '../framework/view/abstract-view';
 
 function createEditEventTemplate({ offers, destination }) {
   const offersTemplate = offers.map(
@@ -126,23 +126,31 @@ function createEditEventTemplate({ offers, destination }) {
 </li>`;
 }
 
-export default class EditEventView {
-  constructor({ event }) {
-    this.event = event;
+export default class EditEventView extends AbstractView {
+  #event = null;
+  #handleSubmit = null;
+  #handleClick = null;
+
+  constructor({ event, onSubmit, onClick }) {
+    super();
+    this.#event = event;
+    this.#handleSubmit = onSubmit;
+    this.#handleClick = onClick;
+    this.element.querySelector('.event__save-btn').addEventListener('submit', this.#submitHandler);
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#clickHandler);
   }
 
-  getTemplate() {
-    return createEditEventTemplate(this.event);
+  get template() {
+    return createEditEventTemplate(this.#event);
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-      return this.element;
-    }
-  }
+  #submitHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleSubmit();
+  };
 
-  removeElement() {
-    this.element = null;
-  }
+  #clickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleClick();
+  };
 }
