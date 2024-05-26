@@ -40,9 +40,11 @@ export default class TripPresenter {
       event: this.#editEvent,
       onSubmit: () => {
         replaceEditToEvent();
+        document.removeEventListener('keydown', escKeyDownHandler);
       },
       onClick: () => {
         replaceEditToEvent();
+        document.removeEventListener('keydown', escKeyDownHandler);
       }
     });
 
