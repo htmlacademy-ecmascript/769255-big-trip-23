@@ -60,17 +60,27 @@ export default class TripPresenter {
     render(editEventComponent, this.#tripView.element);
   }
 
-  init() {
-    render(new SortingView(), this.#tripContainer);
-    render(this.#tripView, this.#tripContainer);
+  #renderEvents() {
+    for (let i = 0; i < this.#events.length; i++) {
+      this.#renderEvent(this.#events[i]);
+    }
+  }
 
+  #renderSort() {
+    render(new SortingView(), this.#tripContainer);
+  }
+
+  #renderAddEvent() {
     render(
       new AddEventView({ event: this.#addEvent }),
       this.#tripView.element
     );
+  }
 
-    for (let i = 0; i < this.#events.length; i++) {
-      this.#renderEvent(this.#events[i]);
-    }
+  init() {
+    this.#renderSort();
+    render(this.#tripView, this.#tripContainer);
+    this.#renderAddEvent();
+    this.#renderEvents();
   }
 }
