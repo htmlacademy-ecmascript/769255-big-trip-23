@@ -5,6 +5,7 @@ import EditEventView from '../view/edit-event-view';
 import TripView from '../view/trip-view';
 import EventView from '../view/event-view';
 import { replace } from '../framework/render';
+import EventPresenter from './event-presenter';
 
 export default class TripPresenter {
   #tripContainer = null;
@@ -21,43 +22,8 @@ export default class TripPresenter {
   }
 
   #renderEvent(event) {
-    const escKeyDownHandler = (evt) => {
-      if(evt.key === 'Escape'){
-        evt.preventDefault();
-        replaceEditToEvent();
-        document.removeEventListener('keydown', escKeyDownHandler);
-      }
-    };
-
-    const eventComponent = new EventView({
-      event,
-      onClick:  () => {
-        replaceEventToEdit();
-        document.addEventListener('keydown', escKeyDownHandler);
-      }
-    });
-    const editEventComponent = new EditEventView({
-      event: this.#editEvent,
-      onSubmit: () => {
-        replaceEditToEvent();
-        document.removeEventListener('keydown', escKeyDownHandler);
-      },
-      onClick: () => {
-        replaceEditToEvent();
-        document.removeEventListener('keydown', escKeyDownHandler);
-      }
-    });
-
-    function replaceEventToEdit() {
-      replace(editEventComponent, eventComponent);
-    }
-
-    function replaceEditToEvent() {
-      replace(eventComponent, editEventComponent);
-    }
-
-    render(eventComponent,this.#tripView.element);
-    render(editEventComponent, this.#tripView.element);
+    const eventPresenter = new EventPresenter(this.#tripView.element);
+    eventPresenter.init(event);
   }
 
   #renderEvents() {
