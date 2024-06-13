@@ -1,10 +1,7 @@
 ﻿import { render } from '../render';
 import SortingView from '../view/sorting-view';
 import AddEventView from '../view/add-event-view';
-import EditEventView from '../view/edit-event-view';
 import TripView from '../view/trip-view';
-import EventView from '../view/event-view';
-import { replace } from '../framework/render';
 import EventPresenter from './event-presenter';
 
 export default class TripPresenter {

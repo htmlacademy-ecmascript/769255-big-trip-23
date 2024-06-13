@@ -1,6 +1,7 @@
-﻿import { render } from "../render";
-import EventView from "../view/event-view";
-import EditEventView from "../view/edit-event-view";
+﻿import { render } from '../render';
+import EventView from '../view/event-view';
+import EditEventView from '../view/edit-event-view';
+import { replace } from '../framework/render';
 
 export default class EventPresenter {
   #event = null;
@@ -9,23 +10,23 @@ export default class EventPresenter {
   #editEventComponent = null;
   #eventContainer = null;
 
-constructor(eventContainer) {
-  this.#eventContainer = eventContainer;
-}
+  constructor(eventContainer) {
+    this.#eventContainer = eventContainer;
+  }
 
   #replaceEventToEdit() {
-    replace(editEventComponent, eventComponent);
+    replace(this.#editEventComponent, this.#eventComponent);
   }
 
   #replaceEditToEvent() {
-    replace(eventComponent, editEventComponent);
+    replace(this.#eventComponent, this.#editEventComponent);
   }
 
   #escKeyDownHandler = (evt) => {
     if(evt.key === 'Escape'){
       evt.preventDefault();
-      replaceEditToEvent();
-      document.removeEventListener('keydown', escKeyDownHandler);
+      this.#replaceEditToEvent();
+      document.removeEventListener('keydown', this.#escKeyDownHandler);
     }
   };
 
