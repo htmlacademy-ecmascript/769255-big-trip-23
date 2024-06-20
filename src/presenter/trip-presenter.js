@@ -3,6 +3,7 @@ import SortingView from '../view/sorting-view';
 import AddEventView from '../view/add-event-view';
 import TripView from '../view/trip-view';
 import EventPresenter from './event-presenter';
+import { remove } from '../framework/render';
 
 export default class TripPresenter {
   #tripContainer = null;
@@ -10,6 +11,7 @@ export default class TripPresenter {
   #editEvent = null;
   #addEvent = null;
   #tripView = new TripView();
+  #eventPresenter = new Map();
 
   constructor({ tripContainer, eventsModel, editEventModel, addEventModel }) {
     this.#tripContainer = tripContainer;
@@ -18,8 +20,16 @@ export default class TripPresenter {
     this.#addEvent = addEventModel.addEvent;
   }
 
+  init() {
+    this.#renderSort();
+    render(this.#tripView, this.#tripContainer);
+    this.#renderAddEvent();
+    this.#renderEvents();
+  }
+
   #renderEvent(event) {
     const eventPresenter = new EventPresenter(this.#tripView.element);
+    this.#eventPresenter.set(event.id, eventPresenter);
     eventPresenter.init(event);
   }
 
@@ -40,10 +50,13 @@ export default class TripPresenter {
     );
   }
 
-  init() {
-    this.#renderSort();
-    render(this.#tripView, this.#tripContainer);
-    this.#renderAddEvent();
-    this.#renderEvents();
+  #handleEventChange(updateEvent) {
+    this.#events = updateEvent(this.#events, updateEvent);
+    this.#eventPresenter.get(updateEvent.id).init(updateEvent);
+}
+
+  #clearTaskList() {
+    this.#eventPresenter.forEach(presenter => presenter.destroy());
+    this.#eventPresenter.clear();
   }
 }

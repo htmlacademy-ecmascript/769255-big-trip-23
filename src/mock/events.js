@@ -1,4 +1,5 @@
-﻿import { getRandomArrayElement } from '../utils';
+﻿import { nanoid } from 'nanoid';
+import { getRandomArrayElement } from '../utils';
 import { TRANSPORT_TYPES } from '../const';
 
 export const mockEvents = [
@@ -32,5 +33,7 @@ export const mockEvents = [
 ];
 
 export function getRandomEvent() {
-  return getRandomArrayElement(mockEvents);
+  return {
+    id: nanoid(),
+    ...getRandomArrayElement(mockEvents)};
 }
